@@ -1,4 +1,4 @@
-# agriplant
+# AgriPlant
 
 A new Flutter project.
 
