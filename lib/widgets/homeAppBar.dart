@@ -19,7 +19,7 @@ class HomeAppBar extends StatelessWidget {
                   return getShimmerLoading();
                 } else {
                   return Text(
-                controller.user.value.username,
+                'Hi there 👋 ${controller.user.value.username}',
                 style: Theme.of(context).textTheme.titleMedium,
               );
                 }
