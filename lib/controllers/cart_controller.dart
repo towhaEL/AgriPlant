@@ -34,7 +34,7 @@ class CartController extends GetxController{
   }
 
 
-  // remove cart item
+  // remove cart item all instances
   Future<void> removeCartItem(Product cartItem) async {
     try {
       await cartRepository.removeCartItem(cartItem);

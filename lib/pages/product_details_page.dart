@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:agriplant/controllers/bookmarks_controller.dart';
 import 'package:agriplant/controllers/product_controller.dart';
 import 'package:agriplant/models/product.dart';
 import 'package:agriplant/pages/auth/global/common/toast.dart';
@@ -24,6 +25,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   bool showMore = false;
   int productCount=1;
   bool isBookmark = false;
+  bool onlyOnce = true;
 
   @override
   void initState() {
@@ -44,9 +46,19 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Get.delete<ProductController>();
+    // Get.delete<BookmarkController>();
     final productController = Get.put(ProductController());
     final cartRepository = Get.put(CartRepository());
+    final bookmarkController = Get.put(BookmarkController());
+
+    if (onlyOnce) {
+      for(var p in bookmarkController.bookmarkProducts) {
+      if(p.productCode == widget.product.productCode) {
+        isBookmark = true;
+      }
+    }
+    onlyOnce = false;
+    }
     
     // final relatedProducts = productController.allProducts
     //     .where((p) => p.serviceCode == widget.product.serviceCode)
@@ -63,8 +75,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             child:
                 IconButton(onPressed: () {
                   if(isBookmark) {
+                    bookmarkController.removeFromBookmarks(widget.product);
                     // remove
                   } else {
+                    bookmarkController.addToBookmarks(widget.product);
                     //add
                   }
                   setState(() {

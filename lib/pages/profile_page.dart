@@ -2,6 +2,7 @@ import 'package:agriplant/AdminPages/add_products.dart';
 import 'package:agriplant/AdminPages/order_management.dart';
 import 'package:agriplant/controllers/user_controller.dart';
 import 'package:agriplant/pages/auth/global/common/toast.dart';
+import 'package:agriplant/pages/bookmark_page.dart';
 import 'package:agriplant/pages/orders_page.dart';
 import 'package:agriplant/pages/profileInfo.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -83,6 +84,17 @@ class ProfilePage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => OrdersPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("My Bookmarks"),
+            leading: const Icon(IconlyLight.bookmark),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BookmarkPage(),
                 ),
               );
             },
