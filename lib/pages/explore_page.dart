@@ -1,6 +1,7 @@
 import 'package:agriplant/controllers/product_controller.dart';
 import 'package:agriplant/models/product.dart';
-import 'package:agriplant/pages/search_page.dart';
+import 'package:agriplant/pages/all_product_list_page.dart';
+import 'package:agriplant/widgets/search_bar.dart';
 import 'package:agriplant/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -136,7 +137,13 @@ class _ExplorePageState extends State<ExplorePage> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                  MaterialPageRoute(
+                  builder: (context) => productList(products: productController.allProducts),
+                ),
+              );
+                },
                 child: const Text("See all products"),
               ),
             ],
