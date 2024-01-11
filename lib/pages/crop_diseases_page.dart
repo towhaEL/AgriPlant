@@ -1,10 +1,13 @@
+
 import 'package:agriplant/pages/diseases/classify.dart';
 import 'package:agriplant/pages/diseases/disease_model.dart';
 import 'package:agriplant/pages/diseases/result_page.dart';
+import 'package:agriplant/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class cropDisease extends StatelessWidget {
@@ -12,6 +15,8 @@ class cropDisease extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRepository = Get.put(UserRepository());
+
     Size size = MediaQuery.of(context).size;
     final Classifier classifier = Classifier();
 
@@ -32,16 +37,20 @@ class cropDisease extends StatelessWidget {
               late double _confidence;
               late Disease _disease;
 
-              await classifier.getDisease(ImageSource.gallery).then((value) {
+              await classifier.getDisease(ImageSource.gallery).then((value) async {
                 // var name = value![0]["label"];
                 // var imagePath = classifier.imageFile.path;
                 // var confidence = value[0]['confidence'];
                 // print(
                 // "Result is $name and Path is $imagePath and confidence is $_confidence");
+                final imageUrl = await userRepository.uploadDiseaseImage('Diseases/Images/', classifier.imageFile.path);
                 _disease = Disease(
                     name: value![0]["label"],
-                    imagePath: classifier.imageFile.path,
-                    confidence: value[0]['confidence']);
+                    imagePath: imageUrl,
+                    confidence: value[0]['confidence'].toString(),
+                    dateTime: DateTime.now().toString(),
+                    diseaseCode: DateTime.now().hashCode,
+                    );
 
                 _confidence = value[0]['confidence'];
               });
@@ -49,7 +58,7 @@ class cropDisease extends StatelessWidget {
               if (_confidence > 0.8) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => showResult(disease: _disease),
+                    builder: (context) => showResult(disease: _disease, imagePath: classifier.imageFile.path),
                   ),
                 );
                 // Set disease for Disease Service
@@ -80,16 +89,20 @@ class cropDisease extends StatelessWidget {
               // var image =
               //     await ImagePicker().pickImage(source: ImageSource.camera);
 
-              await classifier.getDisease(ImageSource.camera).then((value) {
+              await classifier.getDisease(ImageSource.camera).then((value) async {
                 // var name = value![0]["label"];
                 // var imagePath = classifier.imageFile.path;
                 // var confidence = value[0]['confidence'];
                 // print(
                 //     "Result is $name and Path is $imagePath and confidence is $confidence");
+                final imageUrl = await userRepository.uploadDiseaseImage('Diseases/Images/', classifier.imageFile.path);
                 _disease = Disease(
                     name: value![0]["label"],
-                    imagePath: classifier.imageFile.path,
-                    confidence: value[0]['confidence']);
+                    imagePath: imageUrl,
+                    confidence: value[0]['confidence'].toString(),
+                    dateTime: DateTime.now().toString(),
+                    diseaseCode: DateTime.now().hashCode,
+                    );
 
                 _confidence = value[0]['confidence'];
               });
@@ -98,7 +111,7 @@ class cropDisease extends StatelessWidget {
               if (_confidence > 0.8) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => showResult(disease: _disease),
+                    builder: (context) => showResult(disease: _disease, imagePath: classifier.imageFile.path),
                   ),
                 );
                 // Set disease for Disease Service

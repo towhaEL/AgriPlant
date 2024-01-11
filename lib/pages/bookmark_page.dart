@@ -1,4 +1,6 @@
-import 'package:agriplant/pages/BookmarkListPage.dart';
+import 'package:agriplant/pages/Bookmark_product_ListPage.dart';
+import 'package:agriplant/pages/bookmark_DiseaseListPage.dart';
+import 'package:agriplant/pages/diseases/bookmark_process_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -25,7 +27,7 @@ class BookmarkPage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => BookmarkListPage(pageInfo: 'product'),
+                  builder: (context) => BookmarkListPage(),
                 ),
               );
             },
@@ -36,7 +38,7 @@ class BookmarkPage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => BookmarkListPage(pageInfo: 'process'),
+                  builder: (context) => ProcessListPage(),
                 ),
               );
             },
@@ -47,7 +49,7 @@ class BookmarkPage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => BookmarkListPage(pageInfo: 'disease'),
+                  builder: (context) => DiseaseListPage(),
                 ),
               );
             },

@@ -25,6 +25,8 @@ class _CartPageState extends State<CartPage> {
   TextEditingController _cityController = TextEditingController();
   TextEditingController _postCodeController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
+  bool onlyOnce = true;
+  bool isCartEmpty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +37,17 @@ class _CartPageState extends State<CartPage> {
     final cartController = Get.put(CartController());
     final orderController = Get.put(OrderController());
     
-    print(cartController.cartProducts.length);
+    if (onlyOnce) {
+      isCartEmpty = false;
+      onlyOnce = false;
+    }
+
     return Scaffold(
         body: Obx(
           () {
             if (cartController.isCartLoading.value) {
               return getproducteShimmerLoading();
-            } else if (cartController.cartProducts.isEmpty) {
+            } else if (cartController.cartProducts.isEmpty || isCartEmpty) {
               return Container(
                 padding: EdgeInsets.only(left: 50, right: 50,),
                 child: Column(
@@ -201,6 +207,9 @@ class _CartPageState extends State<CartPage> {
                                             
                                             await orderController.proceedToOrder(cartController.cartProducts);
                                             Navigator. of(context). pop();
+                                            setState(() {
+                                              isCartEmpty = true;
+                                            });                              
                                             
                                           },
                                           icon: const Icon(IconlyBold.arrowRight3),

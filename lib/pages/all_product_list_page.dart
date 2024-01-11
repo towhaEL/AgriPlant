@@ -24,7 +24,7 @@ class _productListState extends State<productList> {
   late List<Product> displayList = List.from(mainProductList);
   void updateList(String value) {
     setState(() {
-          displayList = displayList.where((element) => element.name!.toLowerCase().contains(value.toLowerCase())).toList();
+          displayList = displayList.where((element) => element.name.toLowerCase().contains(value.toLowerCase())).toList();
     }
     );
   }

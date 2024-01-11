@@ -1,8 +1,11 @@
+import 'package:agriplant/controllers/bookmarks_controller.dart';
 import 'package:agriplant/models/product.dart';
+import 'package:agriplant/pages/auth/global/common/toast.dart';
 import 'package:agriplant/pages/product_details_page.dart';
+import 'package:agriplant/repositories/cart_repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:get/get.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({super.key, required this.product});
@@ -14,8 +17,23 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  bool isBookmark = false;
+  bool onlyOnce = true;
+
   @override
   Widget build(BuildContext context) {
+    final cartRepository = Get.put(CartRepository());
+    final bookmarkController = Get.put(BookmarkController());
+
+    if (onlyOnce) {
+      for(var p in bookmarkController.bookmarkProducts) {
+      if(p.productCode == widget.product.productCode) {
+        isBookmark = true;
+      }
+    }
+    onlyOnce = false;
+    }
+    
     return GestureDetector(
       onTap: (widget.product.productCode == -1)? null : () {
         Navigator.of(context).push(
@@ -62,9 +80,20 @@ class _ProductCardState extends State<ProductCard> {
                 child: 
                 IconButton.filledTonal(
                     padding: EdgeInsets.zero,
-                    onPressed: () {},
+                    onPressed: () {
+                      if(isBookmark) {
+                    bookmarkController.removeFromBookmarks(widget.product);
+                    // remove
+                  } else {
+                    bookmarkController.addToBookmarks(widget.product);
+                    //add
+                  }
+                  setState(() {
+                    isBookmark = !isBookmark;
+                  });
+                    },
                     iconSize: 18,
-                    icon: const Icon(IconlyLight.bookmark)),
+                    icon: (isBookmark)? Icon(Icons.bookmark_added) : Icon(Icons.bookmark_add_outlined)),
               ),
             ),
             Padding(
@@ -101,7 +130,10 @@ class _ProductCardState extends State<ProductCard> {
                         height: 30,
                         child: IconButton.filled(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () async {
+                            await cartRepository.addProductToCart(widget.product);
+                            showToast(message: "Product added to cart.");
+                          },
                           icon: const Icon(Icons.add),
                         ),
                       ),

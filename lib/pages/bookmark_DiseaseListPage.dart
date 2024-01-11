@@ -1,35 +1,36 @@
-import 'package:agriplant/controllers/processController.dart';
-import 'package:agriplant/models/process.dart';
-import 'package:agriplant/widgets/cultivation_process.dart';
+import 'package:agriplant/controllers/disease_controller.dart';
+import 'package:agriplant/pages/diseases/disease_model.dart';
+import 'package:agriplant/widgets/disease_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-class cultivationProcess extends StatelessWidget {
-  const cultivationProcess({super.key});
-
+class DiseaseListPage extends StatelessWidget {
+  const DiseaseListPage({super.key,});
+  
+  
   @override
   Widget build(BuildContext context) {
-    final _processController = Get.put(ProcessController());
+    Get.delete<DiseaseController>();
+    final diseaseController = Get.put(DiseaseController());
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "Cultivation process",
+        title: Text(
+          "Saved identified diseases",
         ),
       ),
       body: Obx(
         () {
-          if(_processController.isLoading.value) {
+          if(diseaseController.isBookmarkLoading.value) {
             return getproducteShimmerLoading();
-          }
-          else {
+          } else {
             return ListView(padding: const EdgeInsets.all(16), children: [
-          ...List.generate(_processController.allProducts.length, (index) {
+          ...List.generate(diseaseController.bookmarkProducts.length, (index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: processItem(process: _processController.allProducts[index]),
+              child: diseaseItem(bookmark_Item: diseaseController.bookmarkProducts[index],),
             );
           }),
         ]);
@@ -40,8 +41,8 @@ class cultivationProcess extends StatelessWidget {
   }
 
   Shimmer getproducteShimmerLoading() {
-    final dummyProduct = Process.empty();
-    final List<Process> dummyProductList = [dummyProduct,dummyProduct,];
+    final dummyProduct = Disease.empty();
+    final List<Disease> dummyProductList = [dummyProduct,dummyProduct,];
     
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!, highlightColor: Colors.grey[100]!, 
@@ -49,7 +50,7 @@ class cultivationProcess extends StatelessWidget {
           ...List.generate(dummyProductList.length, (index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: processItem(process: dummyProductList[index]),
+              child: diseaseItem(bookmark_Item: dummyProductList[index],),
             );
           }),
         ]),

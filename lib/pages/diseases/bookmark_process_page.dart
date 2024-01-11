@@ -5,31 +5,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-class cultivationProcess extends StatelessWidget {
-  const cultivationProcess({super.key});
-
+class ProcessListPage extends StatelessWidget {
+  const ProcessListPage({super.key,});
+  
+  
   @override
   Widget build(BuildContext context) {
-    final _processController = Get.put(ProcessController());
+    Get.delete<ProcessController>();
+    final processController = Get.put(ProcessController());
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "Cultivation process",
+        title: Text(
+          "Saved Cultivation Processes",
         ),
       ),
       body: Obx(
         () {
-          if(_processController.isLoading.value) {
+          if(processController.isBookmarkLoading.value) {
             return getproducteShimmerLoading();
-          }
-          else {
+          } else {
             return ListView(padding: const EdgeInsets.all(16), children: [
-          ...List.generate(_processController.allProducts.length, (index) {
+          ...List.generate(processController.bookmarkProducts.length, (index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: processItem(process: _processController.allProducts[index]),
+              child: processItem(process: processController.allProducts[index]),
             );
           }),
         ]);
@@ -49,7 +50,7 @@ class cultivationProcess extends StatelessWidget {
           ...List.generate(dummyProductList.length, (index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: processItem(process: dummyProductList[index]),
+              child: processItem(process: dummyProductList[index],),
             );
           }),
         ]),

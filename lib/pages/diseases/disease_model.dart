@@ -1,17 +1,23 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Disease {
+  final int diseaseCode;
   final String name;
-  final double confidence;
-  late String possibleCauses;
-  late String possibleSolution;
+  final String confidence;
+  final String description = ' ';
+  late String possibleCauses = '';
+  late String possibleSolution = '';
   late String imagePath;
-  late DateTime dateTime;
+  final String dateTime;
 
   Disease(
-      {required this.name, required this.imagePath, required this.confidence}) {
-    dateTime = DateTime.now();
+      {required this.name, required this.imagePath, required this.confidence, required this.diseaseCode, required this.dateTime}) {
+    // dateTime = dateTime;
+    // diseaseCode = diseaseCode;
 
     switch (name) {
-      case "Pepper Bell Bacterial Spot":
+      case "Corn: Common Rust":
         possibleCauses =
             "Caused by Xanthomonas bacteria, spread through splashing rain.";
         possibleSolution =
@@ -113,4 +119,37 @@ class Disease {
         break;
     }
   }
+
+  // create empty disease model
+  static Disease empty() => Disease(name: '', imagePath: '', confidence: '', diseaseCode: -1, dateTime: DateTime.now().toString());
+
+  // disease model to json
+  Map<String, dynamic> tojson() {
+    return {
+      'diseaseCode': diseaseCode,
+      'name': name,
+      'imagePath': imagePath,
+      'confidence': confidence, 
+      'dateTime': dateTime,
+    };
+  }
+
+  // factory method to create disease from a firebase document snapshot
+  factory Disease.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() != null) {
+      final data = document.data()!;
+      return Disease(
+        diseaseCode: int.parse(document.id),
+        name: data['name'] ?? '', 
+        imagePath: data['imagePath'] ?? '',
+        confidence: data['confidence'] ?? '', 
+        dateTime: data['dateTime'] ?? '', 
+        );
+    } else {
+      return Disease.empty();
+    }
+  }
+
+
+
 }

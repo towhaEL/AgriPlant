@@ -1,17 +1,38 @@
 import 'dart:io';
 
+import 'package:agriplant/controllers/disease_controller.dart';
 import 'package:agriplant/pages/diseases/disease_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class showResult extends StatelessWidget {
-  const showResult({super.key, required this.disease});
+class showResult extends StatefulWidget {
+  const showResult({super.key, required this.disease, this.imagePath = "null"});
   final Disease disease;
+  final String imagePath;
+
+  @override
+  State<showResult> createState() => _showResultState();
+}
+
+class _showResultState extends State<showResult> {
+  bool isBookmark = false;
+  bool onlyOnce = true;
 
   @override
   Widget build(BuildContext context) {
-    List<String> strarray = disease.name.split(" ");
+    final diseaseController = Get.put(DiseaseController());
+    if (onlyOnce) {
+      for(var p in diseaseController.bookmarkProducts) {
+      if(p.diseaseCode == widget.disease.diseaseCode) {
+        isBookmark = true;
+      }
+    }
+    onlyOnce = false;
+    }
+
+    List<String> strarray = widget.disease.name.split(" ");
     String link = strarray.join("+");
     final Uri url = Uri.parse('https://www.google.com/search?q=' + link);
     Future<void> _launchUrl() async {
@@ -24,12 +45,24 @@ class showResult extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Possible condition"),
-        // backgroundColor: const Color(0xFFF5FFFF),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
-                onPressed: () {}, icon: const Icon(IconlyBroken.bookmark)),
+                onPressed: () {
+                  if(isBookmark) {
+                    diseaseController.removeFromBookmarks(widget.disease);
+                    // remove
+                  } else {
+                    diseaseController.addToBookmarks(widget.disease);
+                    //add
+                  }
+                  setState(() {
+                    isBookmark = !isBookmark;
+                  });
+                }, icon: (isBookmark)? Icon(Icons.bookmark_added) : Icon(Icons.bookmark_add_outlined)
+              ),
           )
         ],
       ),
@@ -42,8 +75,9 @@ class showResult extends StatelessWidget {
               child: Center(
                 child: CircleAvatar(
                   radius: size.width * 0.3,
-                  backgroundImage: Image.file(
-                    File(disease.imagePath),
+                  backgroundImage: (widget.imagePath == 'null')? CachedNetworkImageProvider(widget.disease.imagePath) : 
+                    Image.file(
+                    File(widget.imagePath),
                     fit: BoxFit.cover,
                   ).image,
                 ),
@@ -53,10 +87,10 @@ class showResult extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  disease.name,
+                  widget.disease.name,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
-                        // color: Theme.of(context).colorScheme.primary,
+
                       ),
                 ),
                 IconButton(
@@ -66,8 +100,8 @@ class showResult extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-                "(Confidence ${(disease.confidence * 100).toStringAsFixed(2)}%)",
+            Text( 
+                "( Confidence ${(double.parse(widget.disease.confidence) * 100).toStringAsFixed(2)}% )",
                 style: Theme.of(context).textTheme.bodyLarge),
             const Divider(height: 30, thickness: 2, color: Colors.green),
             SizedBox(
@@ -82,7 +116,7 @@ class showResult extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary),
                   ),
                   Text(
-                    disease.possibleCauses,
+                    widget.disease.possibleCauses,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 25),
@@ -93,7 +127,7 @@ class showResult extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary),
                   ),
                   Text(
-                    disease.possibleSolution,
+                    widget.disease.possibleSolution,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],

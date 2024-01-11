@@ -38,7 +38,11 @@ class bookmarkItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(bookmark_Item.image),
+                    image: (bookmark_Item.image!='')? CachedNetworkImageProvider(
+                    bookmark_Item.image,
+                  ) : CachedNetworkImageProvider(
+                    'https://firebasestorage.googleapis.com/v0/b/agriplant-1904047.appspot.com/o/Products%2FImages%2FThumbnails%2Fscaled_1000048600.jpg?alt=media&token=29ba5556-3a93-484f-837b-42368747600c',
+                  ),
                   ),
                 ),
               ),

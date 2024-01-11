@@ -73,7 +73,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child:
-                IconButton(onPressed: () {
+                IconButton(
+                  onPressed: () {
                   if(isBookmark) {
                     bookmarkController.removeFromBookmarks(widget.product);
                     // remove

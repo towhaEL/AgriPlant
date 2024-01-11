@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -84,6 +85,22 @@ class UserRepository extends GetxController {
 
       final ref = FirebaseStorage.instance.ref(path).child(image.name);
       await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+
+    } on FirebaseException catch (e){
+      throw TFirebaseException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  //upload any image
+  Future<String> uploadDiseaseImage(String path, String imagePath) async{
+    try {
+      Image name = Image.file(File(imagePath)); 
+      final ref = FirebaseStorage.instance.ref(path).child(name.toString());
+      await ref.putFile(File(imagePath));
       final url = await ref.getDownloadURL();
       return url;
 

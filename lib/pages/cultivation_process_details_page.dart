@@ -1,7 +1,10 @@
+import 'package:agriplant/controllers/processController.dart';
 import 'package:agriplant/data/processes.dart';
 import 'package:agriplant/models/process.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProcessDetailsPage extends StatefulWidget {
   const ProcessDetailsPage({super.key, required this.process});
@@ -16,6 +19,7 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
   late TapGestureRecognizer readMoreGestureRecognizer;
   bool showMore = false;
   bool isBookmark = false;
+  bool onlyOnce = true;
 
   @override
   void initState() {
@@ -36,6 +40,16 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final processController = Get.put(ProcessController());
+
+    if (onlyOnce) {
+      for(var p in processController.bookmarkProducts) {
+      if(p.processCode == widget.process.processCode) {
+        isBookmark = true;
+      }
+    }
+    onlyOnce = false;
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -48,8 +62,10 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
             child:
                 IconButton(onPressed: () {
                   if(isBookmark) {
+                    processController.removeFromBookmarks(widget.process);
                     // remove
                   } else {
+                    processController.addToBookmarks(widget.process);
                     //add
                   }
                   setState(() {
@@ -71,7 +87,7 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
+                image: CachedNetworkImageProvider(
                   widget.process.image,
                 ),
               ),
@@ -139,7 +155,7 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProcessDetailsPage(
-                          process: processes[index],
+                          process: processController.allProducts[index],
                         ),
                       ),
                     );
@@ -153,7 +169,7 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage(processes[index].image),
+                              image: CachedNetworkImageProvider(processes[index].image),
                             ),
                           ),
                         )
@@ -161,7 +177,7 @@ class _ProcessDetailsPageState extends State<ProcessDetailsPage> {
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 10),
-              itemCount: processes.length,
+              itemCount: processController.allProducts.length,
               // itemCount: relatedprocesss.length,
             ),
           ),
