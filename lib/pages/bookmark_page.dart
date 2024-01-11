@@ -1,6 +1,6 @@
 import 'package:agriplant/pages/Bookmark_product_ListPage.dart';
 import 'package:agriplant/pages/bookmark_DiseaseListPage.dart';
-import 'package:agriplant/pages/diseases/bookmark_process_page.dart';
+import 'package:agriplant/pages/bookmark_process_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
