@@ -1,93 +1,89 @@
-# AgriPlant - An Agricultural Mobile App
+# 🌾 AgriPlant - An Agricultural Mobile App
 
-**AgriPlant** is a comprehensive mobile application designed to modernize agricultural practices and empower farmers. Built with **Flutter** and **Firebase**, it bridges the gap between technology and traditional farming by offering services like crop disease detection using ML, product listings, cultivation guides, and much more.
+AgriPlant is a smart mobile solution to modernize farming. It connects users with seeds, tools, workers, crop guidance, and a machine learning-based crop disease detection system — all from one easy-to-use platform.
 
-<!-- IMAGE HERE: Add a banner or animated app demo -->
-
----
-
-## 🌱 Features
-
-### 1. User Authentication
-- Secure login with email/password or Google account
-- Password reset functionality
-
-<!-- IMAGE HERE: Login, Sign Up, Google Auth Screens -->
+<p align="center">
+  <img src="demo/agriplant_demo.gif" alt="AgriPlant App Demo" width="300"/>  
+  <!-- Replace with actual GIF or image -->
+</p>
 
 ---
 
-### 2. Home Section
-- Product search bar
-- Consultation calling
-- Featured product showcase
+## 📲 Features
 
-<!-- IMAGE HERE: Home screen UI -->
-
----
-
-### 3. Services Section
-Offers six core agricultural services:
-- Buy seeds & seedlings  
-- Buy fruits & vegetables  
-- Rent machinery & tools  
-- Hire agricultural workers  
-- Access cultivation guides  
-- Detect crop diseases via ML model
-
-<!-- IMAGE HERE: Services page -->
+### 🔐 User Authentication
+- Email/password and Google Sign-In
+- Password reset support  
+  ![Login UI](demo/login.png)
 
 ---
 
-### 4. Shopping Cart & Checkout
-- Add items to cart
-- Maintain order quantity
-- Secure checkout
-
-<!-- IMAGE HERE: Cart screen & checkout page -->
-
----
-
-### 5. Profile & Admin
-- User profile management
-- View bookmarks and order status
-- Admin can add/manage products and orders
-
-<!-- IMAGE HERE: Profile screen, Edit Profile, Admin Panel -->
+### 🏠 Home Section
+- Product search bar  
+- Direct consultation call  
+- Featured product display  
+  ![Home UI](demo/home.png)
 
 ---
 
-### 6. Crop Disease Detection (ML)
-- Upload crop images
-- Detect diseases using a trained ML model
-- Save results and get recommendations
-
-<!-- IMAGE HERE: Disease detection upload and result page -->
+### 🛠 Services
+Provides six services:
+- 🌱 Buy Seeds & Seedlings  
+- 🍎 Buy Fruits & Vegetables  
+- ⚙️ Rent Machineries & Tools  
+- 🧑‍🌾 Hire Workers  
+- 📘 View Cultivation Guides  
+- 🧪 Detect Crop Diseases with ML  
+  ![Services UI](demo/services.png)
 
 ---
 
-### 7. Other Functional Pages
-- Splash Screen & Welcome Page  
-- Product List Page with filters  
-- Product Details Page  
-- Bookmark List  
-- Order Status Tracker  
+### 🛒 Cart & Checkout
+- Add and manage items  
+- Maintain quantity  
+- Place secure orders  
+  ![Cart UI](demo/cart.png)
 
-<!-- IMAGE HERE: Additional UI screens combined -->
+---
+
+### 👤 Profile & Admin
+- View/Edit profile  
+- Track orders & bookmarks  
+- Admin: Add/manage products and orders  
+  ![Profile UI](demo/profile.png)
+
+---
+
+### 🧠 ML-Based Disease Detection
+- Upload crop images  
+- Get real-time disease diagnosis  
+- Save diagnosis history  
+  ![ML UI](demo/disease_detection.png)
+
+---
+
+### 📋 Additional Pages
+- Splash & Welcome  
+- Product List & Detail  
+- Order Status & Bookmarks  
+  ![Extra UI](demo/extras.png)
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **Flutter** – Cross-platform mobile development  
-- **Firebase** – Authentication, Firestore, and Storage  
-- **TensorFlow / Keras** – Machine learning model for disease detection  
-- **Pub.dev Packages** – UI, image picker, animation, etc.
+- **Flutter** – Mobile App Framework  
+- **Firebase** – Auth, Firestore, Storage  
+- **TensorFlow/Keras** – ML Crop Disease Detection  
+- **MongoDB** – (if used for admin or storage)  
+- **Blender** – UI assets or 3D visuals (optional)  
+- **pub.dev packages** – Image picker, state management, animations
 
 ---
 
 ## 🚀 Getting Started
 
-To run the project locally:
+To clone and run this project:
 
 ```bash
 git clone https://github.com/your-username/AgriPlant.git
@@ -96,60 +92,44 @@ flutter pub get
 flutter run
 ```
 
-> Make sure to configure Firebase and ML assets before running.
+---
 
+## 🖼️ Demo
 
-
+<p align="center">
+  <img src="demo/feature_flow.gif" alt="AgriPlant App Demo" width="500"/>
+  <!-- Replace 'feature_flow.gif' with your actual demo filename -->
+</p>
 
 ---
 
-📱 Screenshots & Demo
+## 👨‍💼 Admin Panel Features
 
-<!-- IMAGE HERE: Add a section of screenshots or animated app workflow -->
----
-
-👨‍💼 Admin Panel
-
-Admins have access to:
-
-Add/edit/delete products
-
-View all orders
-
-Manage app content
-
-
+- 🧾 Add/edit/delete products  
+- 📦 Track and manage user orders  
+- 👥 Manage users and roles
 
 ---
 
-✅ Conclusion
+## 📌 Conclusion
 
-AgriPlant brings powerful digital tools into the hands of farmers and agricultural enthusiasts. By integrating ML for disease detection, seamless product purchasing, and guided cultivation support, it aims to reshape modern agriculture.
-
-
----
-
-✍️ Author
-
-Towha Elahi
-
-
+AgriPlant blends innovation with agriculture. From disease detection to product ordering, it supports smarter farming and builds a bridge between rural needs and modern technology.
 
 ---
 
-📬 Contact
+## ✍️ Author
 
-Email: towhae@gmail.com
-
-LinkedIn: linkedin.com/in/towhae
-
-
+- [Towha Elahi](https://github.com/towhaEL)
 
 ---
 
-⭐ Show Your Support
+## 📬 Contact
 
-If you found this project helpful, feel free to ⭐ star the repo and contribute!
+- **Email**: [towhae@gmail.com](mailto:towhae@gmail.com)  
+- **LinkedIn**: [linkedin.com/in/towhae](https://www.linkedin.com/in/towhae)
 
 ---
 
+## ⭐ Show Your Support
+
+If you like this project, leave a ⭐ and share it with your peers!
