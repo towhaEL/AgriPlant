@@ -94,6 +94,7 @@ git clone https://github.com/your-username/AgriPlant.git
 cd AgriPlant
 flutter pub get
 flutter run
+```
 
 > Make sure to configure Firebase and ML assets before running.
 
