@@ -42,7 +42,7 @@ Provides six services:
 - Add and manage items  
 - Maintain quantity  
 - Place secure orders  
-  ![Cart UI](assets/img_rm/MergedImages (1).png)
+  ![Cart UI](assets/img_rm/MergedImages(1).png).
 
 ---
 
@@ -50,7 +50,7 @@ Provides six services:
 - View/Edit profile  
 - Track orders & bookmarks  
 - Admin: Add/manage products and orders  
-  ![Profile UI](assets/img_rm/MergedImages (3).png)
+  ![Profile UI](assets/img_rm/MergedImages(3).png)
 
 ---
 
@@ -58,7 +58,7 @@ Provides six services:
 - Upload crop images  
 - Get real-time disease diagnosis  
 - Save diagnosis history  
-  ![ML UI](assets/img_rm/MergedImages (2).png)
+  ![ML UI](assets/img_rm/MergedImages(2).png)
 
 ---
 
@@ -66,7 +66,7 @@ Provides six services:
 - Splash & Welcome  
 - Product List & Detail  
 - Order Status & Bookmarks  
-  ![Extra UI](assets/img_rm/MergedImages (4).png)
+  ![Extra UI](assets/img_rm/MergedImages(4).png)
 
 ---
 
