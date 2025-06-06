@@ -14,7 +14,7 @@ AgriPlant is a smart mobile solution to modernize farming. It connects users wit
 ### 🔐 User Authentication
 - Email/password and Google Sign-In
 - Password reset support  
-  ![Login UI](assets/ilovepdf_images-extracted/img34.jpg)
+  ![Login UI](assets/img_rm/MergedImages.png)
 
 ---
 
