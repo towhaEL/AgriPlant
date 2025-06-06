@@ -22,7 +22,7 @@ AgriPlant is a smart mobile solution to modernize farming. It connects users wit
 - Product search bar  
 - Direct consultation call  
 - Featured product display  
-  ![Home UI](demo/home.png)
+  ![Home UI](assets/img_rm/img44.jpg)
 
 ---
 
@@ -34,7 +34,7 @@ Provides six services:
 - 🧑‍🌾 Hire Workers  
 - 📘 View Cultivation Guides  
 - 🧪 Detect Crop Diseases with ML  
-  ![Services UI](demo/services.png)
+  ![Services UI](assets/img_rm/img01.jpg)
 
 ---
 
@@ -42,7 +42,7 @@ Provides six services:
 - Add and manage items  
 - Maintain quantity  
 - Place secure orders  
-  ![Cart UI](demo/cart.png)
+  ![Cart UI](assets/img_rm/MergedImages (1).png)
 
 ---
 
@@ -50,7 +50,7 @@ Provides six services:
 - View/Edit profile  
 - Track orders & bookmarks  
 - Admin: Add/manage products and orders  
-  ![Profile UI](demo/profile.png)
+  ![Profile UI](assets/img_rm/MergedImages (3).png)
 
 ---
 
@@ -58,7 +58,7 @@ Provides six services:
 - Upload crop images  
 - Get real-time disease diagnosis  
 - Save diagnosis history  
-  ![ML UI](demo/disease_detection.png)
+  ![ML UI](assets/img_rm/MergedImages (2).png)
 
 ---
 
@@ -66,7 +66,7 @@ Provides six services:
 - Splash & Welcome  
 - Product List & Detail  
 - Order Status & Bookmarks  
-  ![Extra UI](demo/extras.png)
+  ![Extra UI](assets/img_rm/MergedImages (4).png)
 
 ---
 
